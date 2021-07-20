@@ -1,35 +1,15 @@
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../static/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="../static/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <title>TuDuszka</title>
-</head>
-
-<body>
-
-    <nav class="navbar navbar-light bg-secondary">
-        <div class="container">
-            <div>
-                <a href="index.html" class="navbar-brand">TuDu</a>
-            </div>
-            <a href="./add.html" class="btn btn-primary">Add</a>
-        </div>
-    </nav>
-    <div class="container py-4">
+{% extends 'base.html' %}
+{% block content %}
         <h2>{{ todo.title }}</h2>
         <p>{{ todo.todo_text }}</p>
-        <form action="done" class="text-end">
+        <form action="{{ url_for('delete') }}" class="text-end" method="POST">
             <input type="hidden" name="thisId" value="{{ todo.id }}">
-            <input type="button" value="Edit" class="btn btn-success">
-            <input type="button" value="Delete" class="btn btn-danger">
-            <input type="button" value="Done" class="btn btn-primary">
+            <input type="submit" value="Delete" class="btn btn-danger">
         </form>
-    </div>
-</body>
-
-</html>
+        {% if not todo.end_date %}
+        <form action="{{ url_for('done') }}" class="text-end" method="POST">
+            <input type="hidden" name="thisId" value="{{ todo.id }}">
+            <input type="submit" value="Done" class="btn btn-primary">
+        </form>
+        {% endif %}
+{% endblock %}

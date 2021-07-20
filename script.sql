@@ -12,6 +12,6 @@ create table types (
     name string(20)
 );
 
-insert into types(name) values('urgent');
-insert into types(name) values('daily');
-insert into types(name) values('simple');
+insert into types(name) values('danger');
+insert into types(name) values('info');
+insert into types(name) values('success');
